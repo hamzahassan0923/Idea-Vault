@@ -20,7 +20,9 @@ const Navbar = () => {
        
       </ul>
     </div>
-    <Link href={"/"} className="font-bold text-xl">IdeaVault</Link>
+    <Link href={"/"} className="font-bold text-xl"> <span className="bg-linear-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text">
+              IdeaVault
+            </span></Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
