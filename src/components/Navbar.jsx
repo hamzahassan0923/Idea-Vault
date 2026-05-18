@@ -3,7 +3,7 @@ import React from 'react';
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-white/20 backdrop-blur border-b border-base-300 mx-auto container">
+        <div className="navbar bg-white/20 backdrop-blur border-b border-base-300 mx-auto w-10/12">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -26,11 +26,11 @@ const Navbar = () => {
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-     <li><Link href={'/'} className="hover:text-blue-300 ">Home</Link></li>
-        <li><Link href={"/ideas"} className="hover:text-blue-300 ">Ideas</Link></li>
-        <li><Link href={"/add-idea"} className="hover:text-blue-300 ">Add Idea</Link></li>
-        <li><Link href={"/my-ideas"} className="hover:text-blue-300 ">My Ideas</Link></li>
-        <li><Link href={"/my-interactions"} className="hover:text-blue-300 ">My Interactions</Link></li>
+     <li><Link href={'/'} className="hover:text-blue-300 text-[16px]">Home</Link></li>
+        <li><Link href={"/ideas"} className="hover:text-blue-300 text-[16px] ">Ideas</Link></li>
+        <li><Link href={"/add-idea"} className="hover:text-blue-300 text-[16px] ">Add Idea</Link></li>
+        <li><Link href={"/my-ideas"} className="hover:text-blue-300 text-[16px] ">My Ideas</Link></li>
+        <li><Link href={"/my-interactions"} className="hover:text-blue-300 text-[16px] ">My Interactions</Link></li>
     </ul>
   </div>
   <div className="navbar-end">
