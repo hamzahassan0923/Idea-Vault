@@ -1,9 +1,12 @@
+import Banner from "@/components/Banner";
+import Section from "@/components/Section";
 
 
 export default function Home() {
   return (
     <div >
-      <p >banner</p>
+      <Banner></Banner>
+      <Section></Section>
       {/* <div className="
 w-20
 h-24
