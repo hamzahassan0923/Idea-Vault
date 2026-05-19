@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";      
 import Image from "next/image";
+import Link from "next/link";
 
 const IPage = ({idea}) => {
  
@@ -51,7 +52,7 @@ const IPage = ({idea}) => {
         {/* Bottom */}
         <div className="mt-6 flex items-center justify-between">
           <button className="rounded-xl bg-linear-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-medium text-white shadow-md transition duration-300 hover:shadow-2xl">
-            View Details
+            <Link href={`/ideas/${idea._id}`}>View Details</Link>
           </button>
 
         </div>

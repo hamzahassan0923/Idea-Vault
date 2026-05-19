@@ -1,3 +1,4 @@
+import FeatureHead from "./FeatureHead";
 import IPage from "./IPage";
 
 const ideaFetch = async () =>{
@@ -10,9 +11,14 @@ const Feature = async() => {
     const ideas = await ideaFetch()
     
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-15 mx-auto w-11/12">
-           hi
+     <div>
+        <FeatureHead></FeatureHead>
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-15 mx-auto w-11/12">
+            {
+                ideas.map(idea=><IPage key={idea._id} idea={idea}></IPage>)
+            }
         </div>
+     </div>
     );
 };
 

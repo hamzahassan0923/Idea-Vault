@@ -45,7 +45,7 @@ export default function Banner() {
         }}
         loop={true}
         pagination={{ clickable: true }}
-        className="rounded-3xl overflow-hidden"
+        className=" overflow-hidden"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
@@ -74,7 +74,7 @@ export default function Banner() {
                   </p>
 
                   <button className="bg-white text-black px-7 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300">
-                   <Link href={"/ideas"}> Explore Ideas</Link>
+                    <Link href={"/ideas"}> Explore Ideas</Link>
                   </button>
                 </div>
               </div>
