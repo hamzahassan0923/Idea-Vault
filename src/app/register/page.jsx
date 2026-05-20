@@ -2,9 +2,33 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { User, Mail, Lock, Github, Link as LinkIcon } from "lucide-react";
+import { User, Mail, Lock, Link as LinkIcon } from "lucide-react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 const RegisterPage = () => {
+    const router = useRouter();
+
+    const handleRegistration = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const registerData = Object.fromEntries(formData.entries());
+        const { data, error } = await authClient.signUp.email({
+
+            ...registerData
+           
+
+        });
+          
+        if(error){
+             toast.error('Register Failed')
+             return
+        };
+        router.push("/");
+
+    }
+
     return (
         <div className="min-h-screen bg-linear-to-br from-[#050816] via-[#071028] to-[#0b1120] flex items-center justify-center px-4 overflow-hidden relative">
 
@@ -30,7 +54,7 @@ const RegisterPage = () => {
                         </p>
                     </div>
 
-                    <form className="space-y-5">
+                    <form onSubmit={handleRegistration} className="space-y-5">
 
                         {/* Name */}
                         <div>
@@ -39,6 +63,7 @@ const RegisterPage = () => {
                                 <User className="w-5 h-5 text-cyan-400" />
                                 <input
                                     type="text"
+                                    name="name"
                                     placeholder="Enter your name"
                                     className="bg-transparent outline-none w-full ml-3 text-white placeholder:text-gray-500"
                                 />
@@ -52,6 +77,7 @@ const RegisterPage = () => {
                                 <Mail className="w-5 h-5 text-cyan-400" />
                                 <input
                                     type="email"
+                                    name="email"
                                     placeholder="Enter your email"
                                     className="bg-transparent outline-none w-full ml-3 text-white placeholder:text-gray-500"
                                 />
@@ -65,6 +91,7 @@ const RegisterPage = () => {
                                 <LinkIcon className="w-5 h-5 text-cyan-400" />
                                 <input
                                     type="text"
+                                    name="url"
                                     placeholder="https://your-img"
                                     className="bg-transparent outline-none w-full ml-3 text-white placeholder:text-gray-500"
                                 />
@@ -78,21 +105,23 @@ const RegisterPage = () => {
                                 <Lock className="w-5 h-5 text-cyan-400" />
                                 <input
                                     type="password"
+                                    name="password"
                                     placeholder="Create password"
                                     className="bg-transparent outline-none w-full ml-3 text-white placeholder:text-gray-500"
                                 />
                             </div>
                         </div>
 
-                  
+
 
                         {/* Button */}
                         <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.97 }}
+                            type="submit"
                             className="w-full bg-linear-to-r from-blue-600 to-cyan-500 text-white py-3 rounded-2xl font-semibold"
                         >
-                            Create Account
+                           Create Account
                         </motion.button>
                     </form>
 

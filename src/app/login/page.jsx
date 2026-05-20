@@ -4,9 +4,34 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Lock, Mail } from "lucide-react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { authClient } from "@/lib/auth-client";
 
 
 const LoginPage = () => {
+    const router = useRouter();
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const loginData = Object.fromEntries(formData.entries());
+       console.log(formData);
+       console.log(loginData);
+
+        const { data, error } = await authClient.signIn.email({
+
+            ...loginData
+            
+
+        });
+                console.log(data);
+        if(error){
+             toast.error('Login Failed')
+             return
+        };
+        router.push("/");
+    }
     return (
 
        <div>
@@ -41,7 +66,8 @@ const LoginPage = () => {
                     </div>
 
                     {/* Form */}
-                    <form className="space-y-5">
+                    <form onSubmit={handleLogin} className="space-y-5">
+
 
                         {/* Email */}
                         <div>
@@ -54,6 +80,7 @@ const LoginPage = () => {
 
                                 <input
                                     type="email"
+                                    name="email"
                                     placeholder="Enter your email"
                                     className="bg-transparent outline-none w-full ml-3 text-white placeholder:text-gray-500"
                                 />
@@ -69,6 +96,7 @@ const LoginPage = () => {
 
                                 <input
                                     type="password"
+                                    name="password"
                                     placeholder="Enter your Password"
                                     required
                                     minLength={6}
@@ -91,6 +119,7 @@ const LoginPage = () => {
                         <motion.button
                             whileTap={{ scale: 0.97 }}
                             whileHover={{ scale: 1.02 }}
+                            type="submit"
                             className="w-full bg-linear-to-r from-blue-600 to-cyan-500 text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-blue-500/30 transition-all duration-300"
                         >
                             Login

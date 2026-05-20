@@ -6,7 +6,7 @@ import Section from "@/components/Section";
 
 export default function Home() {
   return (
-    <div className="">
+    <div>
      
       <Banner></Banner>
       <Feature></Feature>
