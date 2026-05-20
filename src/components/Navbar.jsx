@@ -17,7 +17,7 @@ import Image from "next/image";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
    const router = useRouter();
-   const {data:session,isPending} = authClient.useSession()
+   const {data:session} = authClient.useSession()
    console.log( session);
 
   
@@ -89,7 +89,7 @@ const Navbar = () => {
 
               <li>
                 <Link
-                  href="/my-ideas"
+                  href="/my-idea"
                   className="text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-xl"
                 >
                   My Ideas
@@ -148,7 +148,7 @@ const Navbar = () => {
 
             <li>
               <Link
-                href="/my-ideas"
+                href="/my-idea"
                 className="text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-xl transition-all duration-300"
               >
                 My Ideas
@@ -254,7 +254,7 @@ const Navbar = () => {
             <LayoutDashboard className="w-5 h-5 text-blue-300" />
 
             <span className="font-medium">
-              Dashboard
+             <Link href={"/dashboard"}>DashBoard</Link>
             </span>
           </button>
 
@@ -262,7 +262,7 @@ const Navbar = () => {
             <User className="w-5 h-5 text-blue-300" />
 
             <span className="font-medium">
-              Profile
+            <Link href={"/profile"}>Profile</Link>
             </span>
           </button>
 
@@ -270,7 +270,7 @@ const Navbar = () => {
             <Settings className="w-5 h-5 text-blue-300" />
 
             <span className="font-medium">
-              Settings
+             <Link href={"/settings"}>Settings</Link>
             </span>
           </button>
 
