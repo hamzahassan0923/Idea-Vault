@@ -14,6 +14,8 @@ const RegisterPage = () => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const registerData = Object.fromEntries(formData.entries());
+        // console.log(registerData);
+        // return
         const { data, error } = await authClient.signUp.email({
 
             ...registerData
@@ -91,7 +93,7 @@ const RegisterPage = () => {
                                 <LinkIcon className="w-5 h-5 text-cyan-400" />
                                 <input
                                     type="text"
-                                    name="url"
+                                    name="image"
                                     placeholder="https://your-img"
                                     className="bg-transparent outline-none w-full ml-3 text-white placeholder:text-gray-500"
                                 />

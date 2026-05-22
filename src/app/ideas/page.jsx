@@ -1,3 +1,4 @@
+import IdeaFeature from "@/components/IdeaFeature";
 import IPage from "@/components/IPage";
 
 const ideaFetch = async () => {
@@ -13,8 +14,11 @@ const IdeasPage = async () => {
 
     return (
         <div>
+            <IdeaFeature></IdeaFeature>
 
-            <div className=" mx-auto w-10/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5">
+            <div className="  grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3  gap-5  bg-[#050816] text-white  px-8 lg:px-30  py-10 items-stretch ">
+
+
 
                 {
                     ideas.map(idea => <IPage key={idea._id} idea={idea}></IPage>)

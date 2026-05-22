@@ -20,6 +20,7 @@ const Navbar = () => {
    const {data:session} = authClient.useSession()
    console.log( session);
 
+
   
   const handleLogOut = async() =>{
     await authClient.signOut();
@@ -189,8 +190,9 @@ const Navbar = () => {
         onClick={() => setOpen(!open)}
         className="flex items-center gap-3 rounded-full bg-white/10 backdrop-blur-xl border border-white/10 px-2 py-1.5 hover:bg-white/15 transition-all duration-300"
       >
+       
         <Image
-          src={session?.user?.url || "/default-avatar.png"}
+          src={session?.user?.image || "/default-avatar.png"}
           width={10}
           height={10}
           alt="profile"
@@ -229,7 +231,7 @@ const Navbar = () => {
         <div className="relative p-4 border-b border-white/10">
           <div className="flex items-center gap-3">
             <Image
-              src={session?.user?.url || "/default-avatar.png"}
+              src={session?.user?.image || "/default-avatar.png"}
               alt="profile"
               width={10}
               height={10}
