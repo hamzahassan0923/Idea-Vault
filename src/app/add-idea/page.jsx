@@ -1,301 +1,261 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
 import {
-  Lightbulb,
-  ImagePlus,
-  Tags,
-  DollarSign,
-  Target,
-  ShieldQuestion,
-  Sparkles,
-  Layers3,
-  Send,
-} from "lucide-react"
+  Button,
+  FieldError,
+  Input,
+  Label,
+  TextArea,
+  TextField,
+ 
+} from "@heroui/react";
 
-const AddIdeaPage = () => {
+const inputStyles = {
+  base: "w-full",
+  inputWrapper:
+    "bg-white/5 border border-white/10 hover:border-cyan-400 focus-within:border-cyan-400 backdrop-blur-xl rounded-2xl",
+  input: "text-white placeholder:text-gray-500",
+};
 
-  const [formData, setFormData] = useState({
-    ideaTitle: "",
-    shortDescription: "",
-    detailedDescription: "",
-    category: "Tech",
-    tags: "",
-    imageURL: "",
-    estimatedBudget: "",
-    targetAudience: "",
-    problemStatement: "",
-    proposedSolution: "",
-  })
+const IdeaAddPage = () => {
+  const onSubmit = async(e) => {
+    e.preventDefault();
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    const formData = new FormData(e.currentTarget);
+    const idea = Object.fromEntries(formData.entries());
+
+    // console.log(ideas);
+   const res = await fetch(`${process.env.IDEA_UR}/ideas` ,{
+      method:'POST',
+      headers: {  
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(idea)
     })
-  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+    const data = await res.json()
+    console.log(data);
 
-    const finalData = {
-      ...formData,
-      tags: formData.tags
-        .split(",")
-        .map((tag) => tag.trim())
-        .filter(Boolean),
-    }
-
-    console.log(finalData)
-
-    alert("Idea Submitted Successfully 🚀")
-  }
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 px-6 py-10 text-white">
-      <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 mb-5">
-            <Sparkles size={18} />
-            Submit Your Innovative Idea
-          </div>
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#020617] via-[#071129] to-[#0f172a] p-6 overflow-hidden">
 
-          <h1 className="text-5xl font-black bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent mb-4">
-            Add New Idea
+      {/* Glow Effects */}
+      <div className="absolute top-20 left-20 w-72 h-72 bg-cyan-500/20 blur-3xl rounded-full"></div>
+
+      <div className="absolute bottom-20 right-20 w-72 h-72 bg-blue-600/20 blur-3xl rounded-full"></div>
+
+      {/* CARD */}
+      <div className="relative w-full max-w-4xl bg-white/5 backdrop-blur-2xl shadow-[0_0_40px_rgba(0,255,255,0.08)] rounded-3xl border border-white/10 p-10">
+
+        {/* HEADER */}
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-bold bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            💡 Share Your Idea
           </h1>
 
-          <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-            Share your creative project, startup concept, or AI innovation
-            with the world.
+          <p className="text-gray-400 mt-3 text-sm">
+            Turn your imagination into reality
           </p>
-        </motion.div>
+        </div>
 
-        {/* Form */}
-        <motion.form
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          onSubmit={handleSubmit}
-          className="grid md:grid-cols-2 gap-6 bg-white/5 border border-white/10 backdrop-blur-xl p-8 rounded-3xl shadow-2xl"
-        >
-          <InputField
-            icon={<Lightbulb size={18} />}
-            label="Idea Title"
-            name="ideaTitle"
-            value={formData.ideaTitle}
-            onChange={handleChange}
-            placeholder="Enter your idea title"
-          />
+        <form onSubmit={onSubmit} className="space-y-8">
 
-          <div>
-            <label className="text-sm text-slate-300 mb-2 block">
-              Category
-            </label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              className="w-full bg-slate-900/70 border border-white/10 rounded-2xl px-4 py-4 outline-none focus:border-blue-500"
-            >
-              <option>Tech</option>
-              <option>AI</option>
-              <option>Health</option>
-              <option>Education</option>
-              <option>Business</option>
-              <option>Security</option>
-            </select>
-          </div>
+            {/* Idea Title */}
+            <div className="md:col-span-2">
+              <TextField name="ideaTitle" isRequired>
+                <Label className="text-gray-300 mb-2 block">
+                  Idea Title
+                </Label>
 
-          <div className="md:col-span-2">
-            <TextAreaField
-              label="Short Description"
-              name="shortDescription"
-              value={formData.shortDescription}
-              onChange={handleChange}
-              placeholder="Write a short description"
-            />
-          </div>
+                <Input
+                  placeholder="Smart AI Study Assistant"
+                  className={inputStyles}
+                />
 
-          <div className="md:col-span-2">
-            <TextAreaField
-              label="Detailed Description"
-              name="detailedDescription"
-              value={formData.detailedDescription}
-              onChange={handleChange}
-              placeholder="Write detailed information about your idea"
-            />
-          </div>
+                <FieldError />
+              </TextField>
+            </div>
 
-          <InputField
-            icon={<Tags size={18} />}
-            label="Tags"
-            name="tags"
-            value={formData.tags}
-            onChange={handleChange}
-            placeholder="AI, Startup, Security"
-          />
+            {/* Short Description */}
+            <div className="md:col-span-2">
+              <TextField name="shortDescription" isRequired>
+                <Label className="text-gray-300 mb-2 block">
+                  Short Description
+                </Label>
 
-          <InputField
-            icon={<ImagePlus size={18} />}
-            label="Image URL"
-            name="imageURL"
-            value={formData.imageURL}
-            onChange={handleChange}
-            placeholder="https://example.com/image.jpg"
-          />
+                <Input
+                  placeholder="One line summary of your idea"
+                  className={inputStyles}
+                />
 
-          <InputField
-            icon={<DollarSign size={18} />}
-            label="Estimated Budget"
-            name="estimatedBudget"
-            value={formData.estimatedBudget}
-            onChange={handleChange}
-            placeholder="$5000"
-          />
+                <FieldError />
+              </TextField>
+            </div>
 
-          <InputField
-            icon={<Target size={18} />}
-            label="Target Audience"
-            name="targetAudience"
-            value={formData.targetAudience}
-            onChange={handleChange}
-            placeholder="Who will use this idea?"
-          />
+            {/* Detailed Description */}
+            <div className="md:col-span-2">
+              <TextField name="detailedDescription" isRequired>
+                <Label className="text-gray-300 mb-2 block">
+                  Detailed Description
+                </Label>
 
-          <div className="md:col-span-2">
-            <TextAreaField
-              label="Problem Statement"
-              name="problemStatement"
-              value={formData.problemStatement}
-              onChange={handleChange}
-              placeholder="What problem does this solve?"
-            />
-          </div>
+                <TextArea
+                  placeholder="Explain your idea in detail..."
+                
+                  className={{
+                    ...inputStyles,
+                    inputWrapper: `${inputStyles.inputWrapper} min-h-32`,
+                  }}
+                />
 
-          <div className="md:col-span-2">
-            <TextAreaField
-              label="Proposed Solution"
-              name="proposedSolution"
-              value={formData.proposedSolution}
-              onChange={handleChange}
-              placeholder="Describe your solution"
-            />
-          </div>
+                <FieldError />
+              </TextField>
+            </div>
 
-          {/* Preview */}
-          {formData.imageURL && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="md:col-span-2 overflow-hidden rounded-3xl border border-white/10"
-            >
-              <img
-                src={formData.imageURL}
-                alt="Preview"
-                className="w-full h-[350px] object-cover"
+            {/* Category
+            <div>
+              <Select name="category" isRequired>
+                <Label className="text-gray-300 mb-2 block">
+                  Category
+                </Label>
+
+                <Button className="w-full justify-between bg-white/5 border border-white/10 hover:border-cyan-400 text-white rounded-2xl">
+                  Select category
+                </Button>
+
+                <Select.Popover className="bg-[#0f172a] border border-white/10 text-white rounded-2xl">
+                  <ListBox>
+                    <ListBox.Item id="Tech">Tech</ListBox.Item>
+                    <ListBox.Item id="AI">AI</ListBox.Item>
+                    <ListBox.Item id="Health">Health</ListBox.Item>
+                    <ListBox.Item id="Education">Education</ListBox.Item>
+                    <ListBox.Item id="Finance">Finance</ListBox.Item>
+                    <ListBox.Item id="Social">Social</ListBox.Item>
+                  </ListBox>
+                </Select.Popover>
+              </Select>
+            </div> */}
+
+            {/* Tags */}
+            <div>
+              <TextField name="tags">
+                <Label className="text-gray-300 mb-2 block">
+                  Tags (optional)
+                </Label>
+
+                <Input
+                  placeholder="AI, startup, automation"
+                  className={inputStyles}
+                />
+
+                <FieldError />
+              </TextField>
+            </div>
+
+            {/* Image URL */}
+            <div className="md:col-span-2">
+              <TextField name="imageUrl" isRequired>
+                <Label className="text-gray-300 mb-2 block">
+                  Image URL
+                </Label>
+
+                <Input
+                  type="url"
+                  placeholder="https://example.com/image.jpg"
+                  className={inputStyles}
+                />
+
+                <FieldError />
+              </TextField>
+            </div>
+
+            {/* Budget */}
+            <TextField name="estimatedBudget">
+              <Label className="text-gray-300 mb-2 block">
+                Estimated Budget
+              </Label>
+
+              <Input
+                type="number"
+                placeholder="5000 USD"
+                className={inputStyles}
               />
-            </motion.div>
-          )}
 
-          {/* Submit */}
-          <div className="md:col-span-2">
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.97 }}
-              type="submit"
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-500 font-bold text-lg flex items-center justify-center gap-3 shadow-lg hover:shadow-blue-500/30 transition"
-            >
-              <Send size={20} />
-              Submit Idea
-            </motion.button>
+              <FieldError />
+            </TextField>
+
+            {/* Target Audience */}
+            <TextField name="targetAudience" isRequired>
+              <Label className="text-gray-300 mb-2 block">
+                Target Audience
+              </Label>
+
+              <Input
+                placeholder="Students, Developers..."
+                className={inputStyles}
+              />
+
+              <FieldError />
+            </TextField>
+
+            {/* Problem */}
+            <div className="md:col-span-2">
+              <TextField name="problemStatement" isRequired>
+                <Label className="text-gray-300 mb-2 block">
+                  Problem Statement
+                </Label>
+
+                <TextArea
+                  placeholder="What problem does your idea solve?"
+                 
+                  className={{
+                    ...inputStyles,
+                    inputWrapper: `${inputStyles.inputWrapper} min-h-28`,
+                  }}
+                />
+
+                <FieldError />
+              </TextField>
+            </div>
+
+            {/* Solution */}
+            <div className="md:col-span-2">
+              <TextField name="proposedSolution" isRequired>
+                <Label className="text-gray-300 mb-2 block">
+                  Proposed Solution
+                </Label>
+
+                <TextArea
+                  placeholder="How does your idea solve the problem?"
+                  
+                  className={{
+                    ...inputStyles,
+                    inputWrapper: `${inputStyles.inputWrapper} min-h-28`,
+                  }}
+                />
+
+                <FieldError />
+              </TextField>
+            </div>
+
           </div>
-        </motion.form>
 
-        {/* Bottom Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-10 p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <Layers3 className="text-blue-400" />
-            <h2 className="text-2xl font-bold">Tips for Better Ideas</h2>
-          </div>
+          {/* BUTTON */}
+          <Button
+            type="submit"
+            className="w-full bg-linear-to-r from-cyan-500 to-blue-600 hover:scale-[1.02] transition-all duration-300 text-white py-7 rounded-2xl text-lg font-semibold shadow-[0_0_25px_rgba(0,255,255,0.3)]"
+          >
+            🚀 Submit Idea
+          </Button>
 
-          <ul className="space-y-3 text-slate-300">
-            <li>• Keep your title short and memorable.</li>
-            <li>• Explain the real-world problem clearly.</li>
-            <li>• Add a clean and relevant image.</li>
-            <li>• Describe your solution simply and effectively.</li>
-          </ul>
-        </motion.div>
+        </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-function InputField({
-  icon,
-  label,
-  name,
-  value,
-  onChange,
-  placeholder,
-}) {
-  return (
-    <div>
-      <label className="text-sm text-slate-300 mb-2 block">
-        {label}
-      </label>
-
-      <div className="flex items-center gap-3 bg-slate-900/70 border border-white/10 rounded-2xl px-4 py-4 focus-within:border-blue-500 transition">
-        <div className="text-blue-400">{icon}</div>
-
-        <input
-          type="text"
-          name={name}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          className="bg-transparent w-full outline-none placeholder:text-slate-500"
-        />
-      </div>
-    </div>
-  )
-}
-
-function TextAreaField({
-  label,
-  name,
-  value,
-  onChange,
-  placeholder,
-}) {
-  return (
-    <div>
-      <label className="text-sm text-slate-300 mb-2 block">
-        {label}
-      </label>
-
-      <textarea
-        rows={5}
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="w-full bg-slate-900/70 border border-white/10 rounded-2xl px-4 py-4 outline-none focus:border-blue-500 placeholder:text-slate-500 resize-none"
-      />
-    </div>
-  )
-}
-
-export default AddIdeaPage;
+export default IdeaAddPage;

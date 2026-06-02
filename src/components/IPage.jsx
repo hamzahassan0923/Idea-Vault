@@ -26,8 +26,8 @@ const IPage = ({ idea }) => {
           <div className="relative overflow-hidden">
             <Image
               src={idea.imageURL}
-              width={800}
-              height={600}
+              width={80}
+              height={60}
                 quality={75}
               alt="AI Startup"
               className="h-56 w-full object-cover transition duration-500 group-hover:scale-110"

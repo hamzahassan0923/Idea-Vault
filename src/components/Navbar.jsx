@@ -18,7 +18,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
    const router = useRouter();
    const {data:session} = authClient.useSession()
-   console.log( session);
+  //  console.log( session);
 
 
   
@@ -192,7 +192,7 @@ const Navbar = () => {
       >
        
         <Image
-          src={session?.user?.image || "/default-avatar.png"}
+          src={session?.user?.image  || "https://images.unsplash.com/photo-1511367461989-f85a21fda167"}
           width={10}
           height={10}
           alt="profile"
