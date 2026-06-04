@@ -2,7 +2,7 @@ import IdeaFeature from "@/components/IdeaFeature";
 import IPage from "@/components/IPage";
 
 const ideaFetch = async () => {
-    const res = await fetch(`${process.env.IDEA_UR}/ideas`)
+    const res = await fetch(`${process.env.IDEA_URL}/ideas`)
     
     const data = await res.json();
 

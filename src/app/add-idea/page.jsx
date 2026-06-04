@@ -25,7 +25,7 @@ const IdeaAddPage = () => {
     const idea = Object.fromEntries(formData.entries());
 
     // console.log(ideas);
-   const res = await fetch(`${process.env.IDEA_UR}/ideas` ,{
+   const res = await fetch(`${process.env.IDEA_URL}/ideas` ,{
       method:'POST',
       headers: {  
         'content-type': 'application/json'
