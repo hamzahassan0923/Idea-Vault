@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, px } from "framer-motion"
+import { motion} from "framer-motion"
 import {
   Cpu,
   BadgeDollarSign,
@@ -12,6 +12,7 @@ import {
   Zap,
 } from "lucide-react"
 import Image from "next/image"
+import CommentSection from "./Comment"
 
 const IdeaDetail =({idea})=> {
  
@@ -39,7 +40,7 @@ const IdeaDetail =({idea})=> {
               {idea.shortDescription}
             </p>
 
-            <div className="flex flex-wrap gap-3">
+            {/* <div className="flex flex-wrap gap-3">
               {idea.tags.map((tag, index) => (
                 <span
                   key={index}
@@ -48,7 +49,7 @@ const IdeaDetail =({idea})=> {
                   #{tag}
                 </span>
               ))}
-            </div>
+            </div> */}
           </motion.div>
 
           <motion.div
@@ -148,7 +149,7 @@ const IdeaDetail =({idea})=> {
             </h2>
           </div>
 
-          <div className="flex flex-wrap gap-4">
+          {/* <div className="flex flex-wrap gap-4">
             {idea.tags.map((tag, index) => (
               <motion.div
                 key={index}
@@ -158,8 +159,9 @@ const IdeaDetail =({idea})=> {
                 {tag}
               </motion.div>
             ))}
-          </div>
+          </div> */}
         </motion.div>
+        <CommentSection className="mt-3"></CommentSection>
       </div>
     </div>
   )

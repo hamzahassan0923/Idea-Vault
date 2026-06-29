@@ -7,7 +7,7 @@ import {
   Label,
   TextArea,
   TextField,
- 
+
 } from "@heroui/react";
 
 const inputStyles = {
@@ -18,16 +18,16 @@ const inputStyles = {
 };
 
 const IdeaAddPage = () => {
-  const onSubmit = async(e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const idea = Object.fromEntries(formData.entries());
 
-    // console.log(ideas);
-   const res = await fetch(`${process.env.IDEA_URL}/ideas` ,{
-      method:'POST',
-      headers: {  
+    console.log(idea);
+    const res = await fetch('https://idea-vault-server-kappa.vercel.app/ideas', {
+      method: 'POST',
+      headers: {
         'content-type': 'application/json'
       },
       body: JSON.stringify(idea)
@@ -105,7 +105,7 @@ const IdeaAddPage = () => {
 
                 <TextArea
                   placeholder="Explain your idea in detail..."
-                
+
                   className={{
                     ...inputStyles,
                     inputWrapper: `${inputStyles.inputWrapper} min-h-32`,
@@ -158,7 +158,7 @@ const IdeaAddPage = () => {
 
             {/* Image URL */}
             <div className="md:col-span-2">
-              <TextField name="imageUrl" isRequired>
+              <TextField name="imageURL" isRequired>
                 <Label className="text-gray-300 mb-2 block">
                   Image URL
                 </Label>
@@ -211,7 +211,7 @@ const IdeaAddPage = () => {
 
                 <TextArea
                   placeholder="What problem does your idea solve?"
-                 
+
                   className={{
                     ...inputStyles,
                     inputWrapper: `${inputStyles.inputWrapper} min-h-28`,
@@ -231,7 +231,7 @@ const IdeaAddPage = () => {
 
                 <TextArea
                   placeholder="How does your idea solve the problem?"
-                  
+
                   className={{
                     ...inputStyles,
                     inputWrapper: `${inputStyles.inputWrapper} min-h-28`,

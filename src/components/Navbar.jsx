@@ -166,7 +166,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-
+          
         {/* Navbar End */}
         <div className="navbar-end">
           <div className="flex items-center gap-3">
@@ -191,13 +191,13 @@ const Navbar = () => {
         className="flex items-center gap-3 rounded-full bg-white/10 backdrop-blur-xl border border-white/10 px-2 py-1.5 hover:bg-white/15 transition-all duration-300"
       >
        
-        <Image
+        {/* <Image
           src={session?.user?.image  || "https://images.unsplash.com/photo-1511367461989-f85a21fda167"}
           width={10}
           height={10}
           alt="profile"
           className="w-10 h-10 rounded-full object-cover border-2 border-blue-400"
-        />
+        /> */}
 
         <div className="hidden md:block text-left leading-tight">
           <h3 className="text-sm font-semibold text-white">
@@ -230,13 +230,13 @@ const Navbar = () => {
         {/* Profile Card */}
         <div className="relative p-4 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <Image
+            {/* <Image
               src={session?.user?.image || "/default-avatar.png"}
               alt="profile"
               width={10}
               height={10}
               className="w-14 h-14 rounded-2xl object-cover border-2 border-blue-400"
-            />
+            /> */}
 
             <div>
               <h2 className="text-white font-semibold text-lg">
