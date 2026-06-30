@@ -2,7 +2,7 @@ import FeatureHead from "./FeatureHead";
 import IPage from "./IPage";
 
 const ideaFetch = async () =>{
-    const res = await fetch(`${process.env.IDEA_URL}/feature`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_IDEA_URL}/feature`)
     const data = await res.json();
   
    

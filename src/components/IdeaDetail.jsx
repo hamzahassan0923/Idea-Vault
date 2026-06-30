@@ -161,7 +161,7 @@ const IdeaDetail =({idea})=> {
             ))}
           </div> */}
         </motion.div>
-        <CommentSection className="mt-3"></CommentSection>
+        <CommentSection></CommentSection>
       </div>
     </div>
   )

@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 const fetchSingle = async (id, token) =>{
-    const res = await fetch(`${process.env.IDEA_URL}/ideas/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_IDEA_URL}/ideas/${id}`, {
         headers: {
             authorization: `Bearer ${token}` 
         }
