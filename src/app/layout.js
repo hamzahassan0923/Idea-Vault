@@ -35,6 +35,7 @@ export default function RootLayout({ children }) {
            <Navbar></Navbar>
        
           {children}
+          <Toaster position="top-center" />
        
         <Footer></Footer>
         <Toaster

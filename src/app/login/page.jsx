@@ -25,12 +25,12 @@ const LoginPage = () => {
             
 
         });
-                console.log(data);
+                
         if(error){
              toast.error('Login Failed')
              return
         };
-        router.push("/");
+         window.location.href = "/";
     }
     return (
 

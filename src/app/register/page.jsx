@@ -27,7 +27,7 @@ const RegisterPage = () => {
              toast.error('Register Failed')
              return
         };
-        router.push("/");
+        window.location.href = "/";
 
     }
 

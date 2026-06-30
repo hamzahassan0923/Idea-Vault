@@ -9,6 +9,7 @@ import {
   TextField,
 
 } from "@heroui/react";
+import toast from "react-hot-toast";
 
 const inputStyles = {
   base: "w-full",
@@ -34,8 +35,13 @@ const IdeaAddPage = () => {
     })
 
     const data = await res.json()
-    console.log(data);
-
+    if (data.insertedId) {
+      toast.success("Idea Added Successfully");
+      e.target.reset();
+    } else {
+      toast.error("Failed to Add Idea");
+    }
+    
   };
 
   return (
