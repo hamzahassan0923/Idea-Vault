@@ -2,7 +2,11 @@ import IdeaFeature from "@/components/IdeaFeature";
 import IPage from "@/components/IPage";
 
 const ideaFetch = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_IDEA_URL}/ideas`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_IDEA_URL}/ideas`,{
+         cache:"no-store"
+    }
+        
+    )
     
     const data = await res.json();
 
